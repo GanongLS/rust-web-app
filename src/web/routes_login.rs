@@ -5,8 +5,10 @@ use serde::Deserialize;
 use serde_json::{json, Value};
 use tower_cookies::{Cookie, Cookies};
 
-pub fn routes() -> Router {
-	Router::new().route("/api/login", post(api_login_handler))
+#[derive(Debug, Deserialize)]
+struct LoginPayload {
+	username: String,
+	pwd: String,
 }
 
 async fn api_login_handler(
@@ -33,8 +35,6 @@ async fn api_login_handler(
 	Ok(body)
 }
 
-#[derive(Debug, Deserialize)]
-struct LoginPayload {
-	username: String,
-	pwd: String,
+pub fn routes() -> Router {
+	Router::new().route("/api/login", post(api_login_handler))
 }
