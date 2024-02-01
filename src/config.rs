@@ -3,10 +3,12 @@ use std::env;
 use std::sync::OnceLock;
 
 pub fn config() -> &'static Config {
+  // static selalu global, tetapi ditaruh dalam fungsi untuk menjaga aksesibilitasnya. (encapsulation principle)
 	static INSTANCE: OnceLock<Config> = OnceLock::new();
 
 	INSTANCE.get_or_init(|| {
 		Config::load_from_env().unwrap_or_else(|ex| {
+      // dibuat panic karena kita ga mau aplikasi jalan tanpa config.
 			panic!("FATAL - WHILE LOADING CONF - Cause: {ex:?}")
 		})
 	})

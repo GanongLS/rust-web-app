@@ -10,7 +10,7 @@ mod model;
 mod web;
 
 pub use self::error::{Error, Result};
-pub use config::config;
+pub use config::config; // dieksport disini agar bisa langsung digunakan crates::config
 
 use crate::model::ModelManager;
 use crate::web::mw_auth::mw_ctx_resolve;
