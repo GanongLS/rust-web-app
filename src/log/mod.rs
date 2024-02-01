@@ -14,6 +14,7 @@ pub async fn log_request(
 	req_method: Method,
 	uri: Uri,
 	ctx: Option<Ctx>,
+
 	web_error: Option<&web::Error>,
 	client_error: Option<ClientError>,
 ) -> Result<()> {
@@ -43,7 +44,7 @@ pub async fn log_request(
 		error_data,
 	};
 
-	debug!("REQUEST LOG LINE:\n{}", json!(log_line));
+	debug!("REQUEST LOG LINE:\n{:#?}", json!(log_line));
 
 	// TODO - Send to cloud-watch.
 

@@ -47,7 +47,7 @@ async fn main() -> Result<()> {
 		.fallback_service(routes_static::serve_dir());
 
 	// region:    --- Start Server
-	let addr = SocketAddr::from(([127, 0, 0, 1], 8080));
+	let addr = SocketAddr::from(([127, 0, 0, 1], 3000));
 	info!("{:<12} - {addr}\n", "LISTENING");
 	let listener = TcpListener::bind(&addr).await.unwrap();
 	axum::serve(listener, routes_all).await.unwrap();
