@@ -1,6 +1,6 @@
 use crate::{Error, Result};
 use std::env;
-use std::sync::OnceLock;
+use std::sync::OnceLock; // OnceLock in sync process, OnceCell async process
 
 pub fn config() -> &'static Config {
   // static selalu global, tetapi ditaruh dalam fungsi untuk menjaga aksesibilitasnya. (encapsulation principle)

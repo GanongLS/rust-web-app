@@ -1,3 +1,4 @@
+// ingat semua file ini hanya berjalan di mode development. tidak berjalan di produksi.
 use sqlx::postgres::PgPoolOptions;
 use sqlx::{Pool, Postgres};
 use std::fs;
@@ -46,6 +47,7 @@ pub async fn init_dev_db() -> Result<(), Box<dyn std::error::Error>> {
 	Ok(())
 }
 
+// postgress transaction execution
 async fn pexec(db: &Db, file: &str) -> Result<(), sqlx::Error> {
 	info!("{:<12} - pexec: {file}", "FOR-DEV-ONLY");
 
