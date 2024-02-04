@@ -6,7 +6,7 @@ use sqlx::postgres::PgRow;
 use sqlx::FromRow;
 
 pub trait DbBmc {
-	const TABLE: &'static str;
+	const TABLE: &'static str; // table name
 }
 
 pub async fn create<MC, E>(_ctx: &Ctx, mm: &ModelManager, data: E) -> Result<i64>
@@ -27,6 +27,7 @@ where
 	Ok(id)
 }
 
+// MC for ModelController
 pub async fn get<MC, E>(_ctx: &Ctx, mm: &ModelManager, id: i64) -> Result<E>
 where
 	MC: DbBmc,
@@ -35,6 +36,8 @@ where
 {
 	let db = mm.db();
 
+	// let sql = format!("SELECT id, title FROM {} WHERE id = $1", MC::TABLE)
+	// pelajari sqlb. sama sqlx
 	let entity: E = sqlb::select()
 		.table(MC::TABLE)
 		.columns(E::field_names())
@@ -67,12 +70,7 @@ where
 	Ok(entities)
 }
 
-pub async fn update<MC, E>(
-	_ctx: &Ctx,
-	mm: &ModelManager,
-	id: i64,
-	data: E,
-) -> Result<()>
+pub async fn update<MC, E>(_ctx: &Ctx, mm: &ModelManager, id: i64, data: E) -> Result<()>
 where
 	MC: DbBmc,
 	E: HasFields,

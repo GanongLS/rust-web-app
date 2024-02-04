@@ -32,11 +32,7 @@ impl DbBmc for TaskBmc {
 }
 
 impl TaskBmc {
-	pub async fn create(
-		ctx: &Ctx,
-		mm: &ModelManager,
-		task_c: TaskForCreate,
-	) -> Result<i64> {
+	pub async fn create(ctx: &Ctx, mm: &ModelManager, task_c: TaskForCreate) -> Result<i64> {
 		base::create::<Self, _>(ctx, mm, task_c).await
 	}
 
@@ -95,6 +91,7 @@ mod tests {
 		Ok(())
 	}
 
+	// Unit testing DB.
 	#[serial]
 	#[tokio::test]
 	async fn test_get_err_not_found() -> Result<()> {
