@@ -22,6 +22,7 @@ impl From<sqlx::Error> for Error {
 	}
 }
 
+// for implementenring store::Error
 impl From<store::Error> for Error {
 	fn from(val: store::Error) -> Self {
 		Self::Store(val)
